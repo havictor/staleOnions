@@ -20,17 +20,17 @@ var MONGODB_URI = mongoose.connect(process.env.MONGODB_URI || "mongodb://localho
 
 var Schema = mongoose.schema;
 
-var articleSchema = new Schema({
-    title: String,
-    link: String,
-    summary: String,
-    comments: String
-})
-//const Cat = mongoose.model('Cat', { name: String });
+// var articleSchema = new Schema({
+//     title: String,
+//     link: String,
+//     summary: String,
+//     comments: String
+// });
+// //const Cat = mongoose.model('Cat', { name: String });
 
-const kitty = new Cat({ name: 'Zildjian' });
-kitty.save().then(() => console.log('meow'));
-//Mongoose
+// const kitty = new Cat({ name: 'Zildjian' });
+// kitty.save().then(() => console.log('meow'));
+// //Mongoose
 
 app.listen(port, function() {
     console.log(`Listening on port ${port}`)

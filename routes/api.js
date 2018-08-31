@@ -3,31 +3,42 @@ const request = require("request");
 
 
 let onionTwo
-var links = []
+var links = [];
+var titles = [];
+var summaries = [];
 
 request.get("http://theonion.com", (error, response, body) => {
     if (!error && response.statusCode == 200) {
         const $ = cheerio.load(body);
 
-        const heading = $(".js_entry-link")
+        const heading = $(".js_entry-title")
 
-        // console.log(heading.text()) //title
-
-        // console.log(heading)
-        // fs.writeFile(path.resolve("./assets/test.js"), heading, (err) => { //removed stringify from list
-        //     if (err) console.log(err);
-        // })
+        heading.each( (index, value) => {
+            var title = $(value).text();
+            titles.push(title);
+        })
+        // console.log(titles) //titles
 
         const url = $(".js_entry-title").children();
 
         url.each( (index, value) => {
-            var link = $(value).attr('href'); //link 
+            var link = $(value).attr('href');
             links.push({"links": link});
         })
-        console.log(links)
+        // console.log(links) //links
 
-        // const excerpt = $(".long-excerpt")
-        // console.log(excerpt.children().text()) // summary
+
+        const excerpt = $(".excerpt")
+        
+        excerpt.each( (index, value) => {
+            var summary =  excerpt.children().text()
+            summaries.push(summary)
+        })
+        // console.log(summaries) // summary
+
+        // console.log(links.length);
+        // console.log(titles.length);
+        // console.log(summaries.length);
     }
 });
 
