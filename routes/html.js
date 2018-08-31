@@ -11,4 +11,4 @@ module.exports = function(app) {
 
 //.js_entry-link .text(); = headline
 //.js_entry-link = link
-//.childOf(.long-excerpt) = summary
+//.childOf(.long-excerpt) = summary || .childOf(.excerpt)

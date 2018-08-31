@@ -2,11 +2,32 @@ const cheerio = require('cheerio');
 const request = require("request");
 
 
-var onionTwo
+let onionTwo
+var links = []
 
 request.get("http://theonion.com", (error, response, body) => {
     if (!error && response.statusCode == 200) {
         const $ = cheerio.load(body);
+
+        const heading = $(".js_entry-link")
+
+        // console.log(heading.text()) //title
+
+        // console.log(heading)
+        // fs.writeFile(path.resolve("./assets/test.js"), heading, (err) => { //removed stringify from list
+        //     if (err) console.log(err);
+        // })
+
+        const url = $(".js_entry-title").children();
+
+        url.each( (index, value) => {
+            var link = $(value).attr('href'); //link 
+            links.push({"links": link});
+        })
+        console.log(links)
+
+        // const excerpt = $(".long-excerpt")
+        // console.log(excerpt.children().text()) // summary
     }
 });
 
@@ -38,4 +59,7 @@ module.exports = function(app) {
     })
 
 }
-    
+
+//.js_entry-link .text(); = headline
+//.js_entry-link = link
+//.childOf(.long-excerpt) = summary || .childOf(.excerpt)
