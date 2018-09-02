@@ -2,11 +2,50 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>The Onion: Just Slightly More Stale</title>
+    <link rel="stylesheet" href="/public/assets/css/bulma.css">
+    <link rel="stylesheet" href="/public/assets/css/style.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+    <title>The Onion Scraper: Like The Onion, Just Slightly More Stale</title>
 </head>
 <body>
-
+    <section class="hero is-light">
+        <div class="hero-body">
+            <div class="container">
+                <h1 class="title">
+                    The Onion Scraper: Like The Onion, Just Slightly More Stale
+                </h1>
+            </div>
+        </div>
+        {{!-- possibly set is-active under handlebars if helper --}}
+        <div id="navbarMenuHeroA" class="navbar-menu">
+            <div class="navbar-end">
+                <a class="button is-outlined navbar-item" id="scrapeButton">
+                    Scrape
+                </a>
+                <a href="/" class="navbar-item is-active">
+                    Home
+                </a>
+                <a href="/articles" class="navbar-item">
+                    Saved Articles
+                </a>
+                <span class="navbar-item">
+                <a href="https://github.com/havictor/staleOnions" target="_blank" class="button is-light is-inverted">
+                    <span class="icon">
+                    <i class="fab fa-github"></i>
+                    </span>
+                    <span>Github Repo</span>
+                </a>
+                </span>
+            </div>
+        </div>
+    </section>
     {{{body}}}
 
 </body>
+    <script
+       src="https://code.jquery.com/jquery-3.3.1.js"
+       integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+       crossorigin="anonymous">
+   </script>
+    <script src="\public\assets\js\app.js"></script>
 </html> 

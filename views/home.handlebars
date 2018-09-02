@@ -1,1 +1,21 @@
-<p>Home is where the heart is</p>
+<div id="currentArticles">
+{{#each newlyScrapedArticles}}
+    <section class="section">
+    <div class="container">
+        <a href={{this.link}} target="_blank">
+            <h1 class="title">{{this.title}}</h1>
+
+            <h2 class="subtitle">{{this.summary}}</h2>
+        </a>
+
+        <a class="button is-success saveButton" data-link={{this.link}} data-title={{this.link}}>
+            <span class="icon is-small">
+                <i class="fas fa-check"></i>
+            </span>
+            <span>Save</span>
+        </a>    
+
+    </div>
+  </section>
+{{/each}}
+</div>
