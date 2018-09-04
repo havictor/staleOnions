@@ -1,11 +1,11 @@
-var express = require("express");
-var bodyParser = require("body-parser");
-var exphbs = require("express-handlebars");
-var path = require("path");
+const express = require("express");
+const bodyParser = require("body-parser");
+const exphbs = require("express-handlebars");
+const path = require("path");
 
-var app = express();
+const app = express();
 
-var port = process.env.PORT || 3030;
+const port = process.env.PORT || 3030;
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -16,7 +16,8 @@ app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 
 //Mongoose
-
+//const MONGODB_URI = 
+//mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines");
 
 // //const Cat = mongoose.model('Cat', { name: String });
 

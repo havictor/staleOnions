@@ -1,6 +1,5 @@
 const cheerio = require('cheerio');
 const request = require("request");
-const mongoose = require('mongoose');
 
 //const MONGODB_URI = mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines");
 
@@ -63,14 +62,15 @@ module.exports = function(app) {
     })
 
     app.post("/api/articles/save/", function (req, res) { //is id necessary?
-        const MONGODB_URI = mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines");
-
-        var article = new Article(req.body)
-        db.Article.create(req.body)
+        //console.log(req.body)
+        //var article = new Article(req.body)
+        Article.create(req.body)
         .then(function(article) {
+            console.log("Success")
           console.log(article);
         })
         .catch(function(err) {
+            console.log("failed")
           return res.json(err);
         });
     })

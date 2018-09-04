@@ -1,8 +1,10 @@
-var mongoose = require("mongoose");
+const mongoose = require("mongoose");
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines");
 
-var Schema = mongoose.Schema;
+const Schema = mongoose.Schema;
 
-var ArticleSchema = new Schema({
+const ArticleSchema = new Schema({
+    id: Schema.ObjectId,
     title: {
         type: String,
         required: true
@@ -15,9 +17,8 @@ var ArticleSchema = new Schema({
         type: String,
     },
     comment: {
-        type: Schema.Types.ObjectId,
-        ref: "comment"
-    }
+        type: String
+    }   
 });
 
 var Article = mongoose.model("Article", ArticleSchema);

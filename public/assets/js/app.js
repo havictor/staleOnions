@@ -10,7 +10,7 @@ $("#scrapeButton").on("click", function() {
 
 $(".saveButton").on("click", function() {
     $.post("/api/articles/save", {
-        title: $(this).attr("data-title"),
+        title: $(this).parent().children(1).find("h1").text(),
         link: $(this).attr("data-link"),
         summary: $(this).parent().children(1).find("h2").text(),
         comment: ""
