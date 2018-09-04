@@ -2,9 +2,6 @@ const cheerio = require('cheerio');
 const request = require("request");
 const mongoose = require("mongoose");
 
-//const MONGODB_URI = mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines");
-
-const db = require("../models");
 var Article = require("../models/article");
 
 let links = [];
@@ -48,11 +45,10 @@ module.exports = function(app) {
                         title: titles[i],
                         link: links[i],
                         summary: summaries[i],
-                        //comment: ""
                     }
                     articles.push(article);
                 }
-                res.send(articles)
+                res.send(true)
             }
         });
     })
@@ -67,25 +63,30 @@ module.exports = function(app) {
         });
     })
     
-    app.put("/api/articles/:id", function (req, res) { //add comments
-
+    app.put("/api/articles/comments/:id", function (req, res) { //add comments
+        mongoose.model("Article").update({_id: req.params.id}, {"comment": req.body.comment}, function(error) {
+            res.send(true);
+        })
     })
     
-    app.get("/api/articles/:id", function (req, res) { //retrieve article/comments
+    app.get("/api/articles/comments/:id", function (req, res) { //retrieve article/comments
         mongoose.model("Article").find({_id: req.params.id}, function (err, article) {
             res.send(article)
         });
     })
     
     app.delete("/api/articles/:id", function (req, res) { //delete saving article & comments
-    
+        mongoose.model("Article").remove({_id: req.params.id}, function(err, article) {
+            if (err) {
+                res.send(err)
+            }
+            res.send(true)
+        })
     })
 
     //html
     app.get("/articles", function (req, res) {
-        //code to pull from db
         mongoose.model("Article").find(function (err, articles) {
-            // console.log(articles)
             res.render("articles", {
                 savedArticle: articles
             })
