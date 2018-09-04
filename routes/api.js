@@ -1,5 +1,6 @@
 const cheerio = require('cheerio');
 const request = require("request");
+const mongoose = require("mongoose");
 
 //const MONGODB_URI = mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines");
 
@@ -41,11 +42,6 @@ module.exports = function(app) {
                     var summary =  $(value).children().text()
                     summaries.push(summary)
                 });
-                // console.log(summaries) // summary
-        
-                // console.log(links.length);
-                // console.log(titles.length);
-                // console.log(summaries.length);
         
                 for (i = 0; i < 19; i++) {
                     var article = {
@@ -61,26 +57,24 @@ module.exports = function(app) {
         });
     })
 
-    app.post("/api/articles/save/", function (req, res) { //is id necessary?
-        //console.log(req.body)
-        //var article = new Article(req.body)
+    app.post("/api/articles/save/", function (req, res) {
         Article.create(req.body)
         .then(function(article) {
-            console.log("Success")
           console.log(article);
         })
         .catch(function(err) {
-            console.log("failed")
           return res.json(err);
         });
     })
     
     app.put("/api/articles/:id", function (req, res) { //add comments
-    
+
     })
     
     app.get("/api/articles/:id", function (req, res) { //retrieve article/comments
-    
+        mongoose.model("Article").find({_id: req.params.id}, function (err, article) {
+            res.send(article)
+        });
     })
     
     app.delete("/api/articles/:id", function (req, res) { //delete saving article & comments
@@ -90,8 +84,12 @@ module.exports = function(app) {
     //html
     app.get("/articles", function (req, res) {
         //code to pull from db
-
-        res.render("articles", {})
+        mongoose.model("Article").find(function (err, articles) {
+            // console.log(articles)
+            res.render("articles", {
+                savedArticle: articles
+            })
+        })
     })
 
     app.get("/*", function (req, res) {

@@ -1,1 +1,36 @@
-<p>Saved articles be here</p>
+{{#each savedArticle}}
+    <section class="section">
+        <div class="container">
+            <a href={{this.link}} target="_blank">
+                <h1 class="title">{{this.title}}</h1>
+
+                <h2 class="subtitle">
+                    {{this.summary}}
+                </h2>
+            </a>
+
+            <a class="button is-dark commentButton" data-id={{this._id}}>
+                <span class="icon is-small" data-id={{this._id}}>
+                    <i class="fas fa-comment" data-id={{this._id}}></i>
+                </span>
+                <span data-id={{this._id}}>Comment</span>
+            </a>   
+            <a class="button is-danger deleteButton" data-id={{this._id}}>
+                <span class="icon is-small">
+                    <i class="fas fa-window-close"></i>
+                </span>
+                <span>Delete</span>
+            </a>  
+        </div>
+    </section>
+{{/each}}
+<div class="modal">
+  <div class="modal-background closeModal"></div>
+  <div class="modal-content">
+    <div id="modalTitle"></div>
+    <div id="modalNote"></div>
+    <input id="modalEntry">
+
+  </div>
+  <button class="modal-close is-large closeModal" aria-label="close"></button>
+</div>
